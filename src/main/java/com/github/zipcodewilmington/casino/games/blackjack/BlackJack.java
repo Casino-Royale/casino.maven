@@ -11,7 +11,7 @@ public class BlackJack implements GameInterface, PlayerInterface {
     List<Integer> playersHand;
     List<Integer> dealersHand;
     Deque<Integer> deckOfCards;
-    Double betAmount; // Equal to user input
+    Integer betAmount; // Equal to user input
 
     public BlackJack () {
         this.playersHand = new ArrayList<>();
@@ -62,13 +62,13 @@ public class BlackJack implements GameInterface, PlayerInterface {
 
     public void playerBlackJack () {
         if (playersCurrentValue() == 21) {
-            calculateWinnings(3.0, betAmount);
+            calculateWinnings(3, betAmount);
         }
     }
 
     public void dealerConditions () {
         if (dealersCurrentValue() > 21) {
-            calculateWinnings(2.0, betAmount); //Players winnings, not dealers (Player won)
+            calculateWinnings(2, betAmount); //Players winnings, not dealers (Player won)
         } else if (dealersCurrentValue() <= 21 && dealersCurrentValue() > playersCurrentValue()) {
             subtractBetFromBalance(betAmount);
         }
@@ -106,17 +106,17 @@ public class BlackJack implements GameInterface, PlayerInterface {
     }
 
     @Override
-    public Double calculateWinnings(Double multiplier, Double betAmount) {
+    public Integer calculateWinnings(Integer multiplier, Integer betAmount) {
         return null;
     }
 
     @Override
-    public void subtractBetFromBalance(Double betAmount) {
+    public void subtractBetFromBalance(Integer betAmount) {
 
     }
 
     @Override
-    public void addMoneyToBalance(PlayerInterface Player, Double winnings) {
+    public void addMoneyToBalance(PlayerInterface Player, Integer winnings) {
 
     }
 
