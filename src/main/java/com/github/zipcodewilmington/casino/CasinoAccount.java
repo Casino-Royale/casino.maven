@@ -22,17 +22,13 @@ public class CasinoAccount {
 
 
 
-    /*
-    public void setPassword(String password){
-        if(this.validPass()){
-            if(this.confirmPass()){
-                this.password = password;
-            } else {
-
-            }
-        }
+feature/CasinoAccount
+    public String getPassword() {
+        return password;
     }
 
-     */
+    public String getAccountName() {
+        return accountName;
+    }
 
 }
