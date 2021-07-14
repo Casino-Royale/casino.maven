@@ -27,10 +27,15 @@ public class BeetleGame implements GameInterface {
      */
     public void run(){
         if(isRunning){
-
+            this.nextPlayer();
+            game.getDice().tossAndSum();
         }
     }
 
+    public void nextPlayer(){
+        game.setCurrentPlayer(-1);
+        game.nextPlayer();
+    }
 
 
     /**
