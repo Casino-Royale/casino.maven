@@ -40,7 +40,6 @@ public class NumberGuessGameTests {
     public void getGuessPercentage(){
         NumberGuessGame game = new NumberGuessGame();
         Integer guessedNumber = 10;
-        Integer max = game.getMaxNumber();
         Integer actualNumber = 5;
         Integer range = Math.abs(guessedNumber - actualNumber);
         Double actual = game.guessRangePercentage(range);
