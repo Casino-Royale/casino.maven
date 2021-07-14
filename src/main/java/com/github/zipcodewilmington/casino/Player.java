@@ -1,10 +1,11 @@
 package com.github.zipcodewilmington.casino;
 
-public class Player{
+public class Player implements PlayerInterface{
 
     String name;
     Integer balance;
     Integer currentBet = 0;
+    CasinoAccount arcadeAccount;
 
     public Player(String name, Integer initialDeposit) {
         this.name = name;
@@ -21,7 +22,7 @@ public class Player{
         return balance;
     }
 
-    private void setCurrentBet(Integer currentBet) {
+    public void setCurrentBet(Integer currentBet) {
         this.currentBet = currentBet;
     }
 
@@ -36,7 +37,12 @@ public class Player{
         return currentBet;
     }
 
-    private Integer getCurrentBet() {
+    public Integer getCurrentBet() {
         return currentBet;
     }
+
+    public CasinoAccount getArcadeAccount(){
+        return this.arcadeAccount;
+    }
+
 }

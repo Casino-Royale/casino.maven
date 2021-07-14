@@ -10,6 +10,14 @@ public class BeetleGame implements GameInterface {
     private Beetle game;
     private Boolean isRunning = false;
     private PlayerInterface player;
+
+    public BeetleGame(PlayerInterface... players){
+        this.game = new Beetle(players.length);
+        for(int i = 0; i < players.length; i++){
+            this.add(players[i]);
+        }
+    }
+
     public void add(PlayerInterface player){
         players.add(player);
     }
