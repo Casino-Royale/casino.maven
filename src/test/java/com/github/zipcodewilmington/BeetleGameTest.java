@@ -173,29 +173,31 @@ public class BeetleGameTest {
     }
 
     @Test
-    public void runTest(){
+    public void printEndingGameMessage(){
         BeetleGame beetleGame = new BeetleGame();
-        beetleGame.setDemo(true);
-        beetleGame.run();
-        Integer actual = beetleGame.getBetAmt();
-        Integer expected = null;
 
+        String actual = beetleGame.printEndingGameMessage();
+        String expected = "\nFinal Beetle results: \n" +
+                "\u001B[32mYour last dice roll: 0  Your Beetle:  \n" +
+                "\u001B[36mBody:0  Head:0  Legs:0  Eyes:0  Antenna:0  Tail:0  \n" +
+                "\u001B[32mDealer's last dice roll: 0  Dealer's Beetle:  \n" +
+                "\u001B[36mBody:0  Head:0  Legs:0  Eyes:0  Antenna:0  Tail:0  \n" +
+                "You win!You win!";
         Assert.assertEquals(actual, expected);
     }
 
     @Test
-    public void printBeetleCards(){
+    public void printNextTurnMessage(){
         BeetleGame beetleGame = new BeetleGame();
-        String expected = "\u001B[32mYour last dice roll: 0  Your Beetle:  \n" +
-                          "\u001B[36mBody:0  Head:0  Legs:0  Eyes:0  Antenna:0  Tail:0  \n" +
-                          "\u001B[32mDealer's last dice roll: 0  Dealer's Beetle:  \n" +
-                          "\u001B[36mBody:0  Head:0  Legs:0  Eyes:0  Antenna:0  Tail:0  ";
-        String actual = beetleGame.printBeetleCards();
 
-
-        Assert.assertEquals(expected, actual);
+        String actual = beetleGame.printNextTurnMessage();
+        String expected =
+                "\u001B[32mYour last dice roll: 0  Your Beetle:  \n" +
+                "\u001B[36mBody:0  Head:0  Legs:0  Eyes:0  Antenna:0  Tail:0  \n" +
+                "\u001B[32mDealer's last dice roll: 0  Dealer's Beetle:  \n" +
+                "\u001B[36mBody:0  Head:0  Legs:0  Eyes:0  Antenna:0  Tail:0  \n" +
+                "Press enter to roll next dice";
+        System.out.println(actual);
+        Assert.assertEquals(actual, expected);
     }
-
-
-
 }
