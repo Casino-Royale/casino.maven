@@ -42,6 +42,7 @@ public class BeetleGame implements GameInterface {
             this.executeTurn();
             this.isGameOver(this.game.checkWinner(this.game.getCurrentPlayer()));
         }
+        this.determinePayout();
         console.println(this.printEndingGameMessage());
     }
 
@@ -141,6 +142,7 @@ public class BeetleGame implements GameInterface {
 
     public String printWinnerMessage(){
         if(this.game.getCurrentPlayer() == 0){
+            this.determinePayout();
             return "You win!";
         } else {
             return "Dealer wins...";
