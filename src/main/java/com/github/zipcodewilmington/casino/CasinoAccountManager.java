@@ -23,15 +23,10 @@ public class CasinoAccountManager {
             if(name.equals(accountName))
                if(pass.equals(accountPassword)){
                    return currentAccount;
-            } else {
-                System.out.println("Account Name or Password does not match. Are you really you?");
-                return null;
             }
         }
-        String currentMethodName = new Object(){}.getClass().getEnclosingMethod().getName();
-        String currentClassName = getClass().getName();
-        String errorMessage = "Method with name [ %s ], defined in class with name [ %s ] has  not yet been implemented";
-        throw new RuntimeException(String.format(errorMessage, currentMethodName, currentClassName));
+        System.out.println("Account Name or Password does not match. Are you really you?");
+        return null;
     }
 
     /**
@@ -44,10 +39,6 @@ public class CasinoAccountManager {
     public CasinoAccount createAccount(String accountName, String accountPassword) {
         CasinoAccount myAccount = new CasinoAccount(accountName, accountPassword);
         return myAccount;
-        //String currentMethodName = new Object(){}.getClass().getEnclosingMethod().getName();
-        //String currentClassName = getClass().getName();
-        //String errorMessage = "Method with name [ %s ], defined in class with name [ %s ] has  not yet been implemented";
-        //throw new RuntimeException(String.format(errorMessage, currentMethodName, currentClassName));
     }
 
     /**
@@ -57,9 +48,5 @@ public class CasinoAccountManager {
      */
     public void registerAccount(CasinoAccount casinoAccount) {
         this.accountList.add(casinoAccount);
-        //String currentMethodName = new Object(){}.getClass().getEnclosingMethod().getName();
-        //String currentClassName = getClass().getName();
-        //String errorMessage = "Method with name [ %s ], defined in class with name [ %s ] has  not yet been implemented";
-        //throw new RuntimeException(String.format(errorMessage, currentMethodName, currentClassName));
     }
 }
