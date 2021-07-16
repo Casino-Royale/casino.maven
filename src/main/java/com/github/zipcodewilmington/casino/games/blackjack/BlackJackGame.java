@@ -77,10 +77,11 @@ public class BlackJackGame implements GameInterface {
             if (twoCardBlackJack()) {
                 green.println("BLACK JACK!!!" + "\n");
                 calculateWinnings(3, userBet);
-            } else if (bj.playersHand.get(0).equals(bj.playersHand.get(1))) {  // include conditional on starting blackjack!
-                splitPlayer();
             } else if(isDemo){
                 return;
+            } else if (bj.playersHand.get(0).equals(bj.playersHand.get(1))) {  // include conditional on starting blackjack!
+                splitPlayer();
+
             } else {
                 standardGame();
         }
@@ -304,12 +305,12 @@ public class BlackJackGame implements GameInterface {
     }
 
     public void subtractBetFromBalance(Integer betAmount) {
-
+        this.getPlayer().getArcadeAccount().alterAccountBalance(betAmount * -1);
     }
 
 
     public void addMoneyToBalance(PlayerInterface Player, Integer winnings) {
-
+        Player.getArcadeAccount().alterAccountBalance(winnings);
     }
 
     public void add(PlayerInterface player) {
@@ -351,5 +352,17 @@ public class BlackJackGame implements GameInterface {
 
     public BlackJack getGame() {
         return bj;
+    }
+
+    public void setGame(){
+        bj = new BlackJack();
+    }
+
+    public Integer getSplitBet() {
+        return splitBet;
+    }
+
+    public void setSplitBet(Integer splitBet) {
+        this.splitBet = splitBet;
     }
 }
