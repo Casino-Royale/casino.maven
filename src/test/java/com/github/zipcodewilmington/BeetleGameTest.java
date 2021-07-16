@@ -72,6 +72,102 @@ public class BeetleGameTest {
         Assert.assertEquals(expected, actual);
     }
 
+    @Test
+    public void isGameOverTest1(){
+        BeetleGame beetleGame = new BeetleGame();
+        beetleGame.setRunning(true);
+        beetleGame.isGameOver(false);
+        Boolean actual = beetleGame.getIsRunning();
 
+        Assert.assertTrue(actual);
+    }
 
+    @Test
+    public void isGameOverTest2(){
+        BeetleGame beetleGame = new BeetleGame();
+        beetleGame.setRunning(true);
+        beetleGame.isGameOver(true);
+        Boolean actual = beetleGame.getIsRunning();
+
+        Assert.assertFalse(actual);
+    }
+
+    @Test
+    public void determinePayout(){
+        BeetleGame beetleGame = new BeetleGame();
+        CasinoAccount account = new CasinoAccount("Bjork", "beeyork");
+        PlayerInterface player = new Player("Bjork", account);
+        beetleGame.add(player);
+        player.getArcadeAccount().alterAccountBalance(500);
+        beetleGame.setBetAmt(200);
+        beetleGame.getGame().setCurrentPlayer(0);
+        beetleGame.determinePayout();
+        Boolean actual = player.getArcadeAccount().getAccountBalance() > 500;
+
+        Assert.assertTrue(actual);
+    }
+
+    @Test
+    public void calculateWinningsTest(){
+        BeetleGame beetleGame = new BeetleGame();
+        CasinoAccount account = new CasinoAccount("Bjork", "beeyork");
+        PlayerInterface player = new Player("Bjork", account);
+        beetleGame.add(player);
+        player.getArcadeAccount().alterAccountBalance(500);
+        beetleGame.setBetAmt(200);
+        beetleGame.getGame().setCurrentPlayer(0);
+
+        Integer actual = beetleGame.calculateWinnings(2, 200);
+        Integer expected = 400;
+        Assert.assertEquals(actual, expected);
+    }
+
+    @Test
+    public void subtractTest(){
+        BeetleGame beetleGame = new BeetleGame();
+        CasinoAccount account = new CasinoAccount("Bjork", "beeyork");
+        PlayerInterface player = new Player("Bjork", account);
+        player.getArcadeAccount().alterAccountBalance(500);
+        beetleGame.add(player);
+        beetleGame.subtractBetFromBalance(200);
+        Integer expected = 300;
+        Integer actual = player.getArcadeAccount().getAccountBalance();
+        Assert.assertEquals(actual, expected);
+    }
+
+    @Test
+    public void addMoneyToBalance(){
+        BeetleGame beetleGame = new BeetleGame();
+        CasinoAccount account = new CasinoAccount("Bjork", "beeyork");
+        PlayerInterface player = new Player("Bjork", account);
+        player.getArcadeAccount().alterAccountBalance(500);
+        beetleGame.add(player);
+        beetleGame.addMoneyToBalance(player,200);
+        Integer expected = 700;
+        Integer actual = player.getArcadeAccount().getAccountBalance();
+        Assert.assertEquals(actual, expected);
+    }
+
+    @Test
+    public void printWelcomeTest(){
+        BeetleGame beetleGame = new BeetleGame();
+
+        String actual = beetleGame.printWelcome();
+        String expected = "\u001B[33m***********************************\n" +
+                "***                             ***\n" +
+                "******   WELCOME TO BEETLE   ******\n" +
+                "***                             ***\n" +
+                "***********************************";
+
+        Assert.assertEquals(actual, expected);
+    }
+
+    @Test
+    public void getDemoTest(){
+        BeetleGame beetleGame = new BeetleGame();
+
+        Boolean actual = beetleGame.getDemo();
+
+        Assert.assertFalse(actual);
+    }
 }
