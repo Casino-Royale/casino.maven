@@ -63,7 +63,6 @@ public class BeetleGame implements GameInterface {
                 "  Dealer's Beetle:  \n";
         output += game.printBeetle(1);
         return output;
-
     }
 
     public void isGameOver(boolean playerWon){
@@ -145,7 +144,7 @@ public class BeetleGame implements GameInterface {
     }
 
     public void printEndingGameMessage(){
-        
+
         /*
         console.newLine();
         console.println("Final Beetle results: ");
