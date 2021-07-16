@@ -15,7 +15,7 @@ public class PlinkoGame implements GameInterface{
     public int initialPosition;
     private int bet;
     public int multiplier;
-    public int balance;
+    int balance;
 
 
 
@@ -38,6 +38,8 @@ public class PlinkoGame implements GameInterface{
         Integer playerNumber;
         String userInput;
 
+        // When the game is played, and you lose, walk away from table, come back in, and you gain double the amount you lost
+
         System.out.println("\u001B[32mHello, and welcome to the game Plinko!");
         while(continueGame){
             System.out.println("\u001B[32mYou currently have: $" + playerInt.getArcadeAccount().getAccountBalance());
@@ -47,9 +49,9 @@ public class PlinkoGame implements GameInterface{
             int plinkSpot=getPlinkoSpot();
             this.multiplier=plinkSpot;
             System.out.println("\u001B[32mAfter playing, now your position is: "+plinkSpot);
-            balance += payout(plinkSpot);
             subtractBetFromBalance(bet);
-            playerInt.getArcadeAccount().alterAccountBalance(balance);
+            bet += payout(plinkSpot);
+            playerInt.getArcadeAccount().alterAccountBalance(bet);
             System.out.println("\u001B[32mYou now have: $" + balance);
             if (balance <= 0)
             {
