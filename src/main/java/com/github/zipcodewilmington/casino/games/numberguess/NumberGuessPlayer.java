@@ -15,11 +15,15 @@ public class NumberGuessPlayer implements PlayerInterface {
 
     @Override
     public CasinoAccount getArcadeAccount() {
-        return null;
+        return player.getArcadeAccount();
     }
 
     @Override
     public void setArcadeAccount(CasinoAccount casinoAccount) {
+        this.player.setArcadeAccount(casinoAccount);
+    }
 
+    public PlayerInterface getPlayer() {
+        return this.player;
     }
 }
