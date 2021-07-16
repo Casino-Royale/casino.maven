@@ -66,7 +66,7 @@ public class BlackJackGameTest {
     public void splitPlayerHitsBlackJackTest () {
         BlackJackGame bjg = new BlackJackGame();
         BlackJack bj = new BlackJack();
-        
+
     }
 
     @Test

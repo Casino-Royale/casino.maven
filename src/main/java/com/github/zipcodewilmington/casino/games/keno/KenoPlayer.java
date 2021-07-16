@@ -17,6 +17,9 @@ public class KenoPlayer implements PlayerInterface {
         CasinoAccount casinoAccount1;
     }
 
+    public PlayerInterface getPlayer() {
+        return player;
+    }
 }
 
 
