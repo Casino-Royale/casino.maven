@@ -34,14 +34,7 @@ public class BlackJackGame implements GameInterface {
     }
 
     public void run() {
-        blue.println("============================================================" + "\n" +
-         "=====                                                  =====" + "\n" +
-         "=====                     WELCOME                      =====" + "\n" +
-         "=====                       TO                         =====" + "\n" +
-         "=====                    B L A C K                     =====" + "\n" +
-         "=====                     J A C K                      =====" + "\n" +
-         "=====                                                  =====" + "\n" +
-         "============================================================");
+        printWelcome();
         while(!isRunning) {
             // include betting range
             playerInt.getArcadeAccount().alterAccountBalance(winnings);
@@ -60,6 +53,17 @@ public class BlackJackGame implements GameInterface {
                     isRunning = true;
             }
         }
+    }
+
+    public void printWelcome () {
+        blue.println("============================================================" + "\n" +
+                "=====                                                  =====" + "\n" +
+                "=====                     WELCOME                      =====" + "\n" +
+                "=====                       TO                         =====" + "\n" +
+                "=====                    B L A C K                     =====" + "\n" +
+                "=====                     J A C K                      =====" + "\n" +
+                "=====                                                  =====" + "\n" +
+                "============================================================");
     }
 
     public void startGame () {
@@ -302,6 +306,22 @@ public class BlackJackGame implements GameInterface {
 
     public void remove(PlayerInterface player) {
 
+    }
+
+    public Boolean getRunning() {
+        return isRunning;
+    }
+
+    public void setRunning(Boolean running) {
+        isRunning = running;
+    }
+
+    public Integer getUserBet() {
+        return userBet;
+    }
+
+    public void setUserBet(Integer userBet) {
+        this.userBet = userBet;
     }
 
 
