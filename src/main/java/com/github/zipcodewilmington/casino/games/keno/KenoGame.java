@@ -298,13 +298,14 @@ public class KenoGame implements GameInterface {
         else
         {
             multiplier = payout[kenoSpot][kenoCatch];
-            payoutAmount = calculateWinnings(multiplier,betAmount);
+            payoutAmount = calculateWinnings(multiplier,betAmount);//to calculate winnings
         }
         return payoutAmount;
     }
 
     @Override
     public Integer calculateWinnings(Integer multiplier, Integer betAmount) {
+
         return multiplier*betAmount;
     }
 
