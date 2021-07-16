@@ -40,9 +40,10 @@ public class BeetleGame implements GameInterface {
         while(this.isRunning){
             this.nextPlayer();
             this.executeTurn();
+            this.console.pressEnterToProceed();
             this.isGameOver(this.game.checkWinner(this.game.getCurrentPlayer()));
         }
-        this.printEndingGameMessage();
+        console.println(this.printEndingGameMessage());
     }
 
     public void initGame(){
@@ -77,11 +78,14 @@ public class BeetleGame implements GameInterface {
     public void executeTurn(){
         Integer currentPlayer = game.getCurrentPlayer();
         if(game.getCurrentPlayer() == 0){
-            console.println(this.printBeetleCards());
-            console.println("Press enter to roll next dice");
-            console.pressEnterToProceed();
+            printNextTurnMessage();
         }
         game.setPlayerBeetles(currentPlayer, game.getDice().tossAndSum());
+    }
+
+    public String printNextTurnMessage(){
+        String output = this.printBeetleCards() + "\nPress enter to roll next dice";
+        return output;
     }
 
     public Integer determinePayout(){
@@ -134,17 +138,20 @@ public class BeetleGame implements GameInterface {
         return console.getIntegerInput("\u001B[34m How much do you want to bet?");
     }
 
-    public void printWinnerMessage(){
+    public String printWinnerMessage(){
         if(this.game.getCurrentPlayer() == 0){
-            console.println("You win!");
+            return "You win!";
         } else {
-            console.println("Dealer wins...");
+            return "Dealer wins...";
         }
-        console.newLine();
     }
 
-    public void printEndingGameMessage(){
+    public String printEndingGameMessage(){
+        String output = "\nFinal Beetle results: \n" +
+                this.printBeetleCards() + "\n";
+        output += this.printWinnerMessage() + printWinnerMessage();
 
+        return output;
         /*
         console.newLine();
         console.println("Final Beetle results: ");
