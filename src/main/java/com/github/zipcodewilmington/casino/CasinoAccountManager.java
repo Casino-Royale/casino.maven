@@ -29,23 +29,13 @@ public class CasinoAccountManager {
         return null;
     }
 
-    /**
-     * logs & creates a new `ArcadeAccount`
-     *
-     * @param accountName     name of account to be created
-     * @param accountPassword password of account to be created
-     * @return new instance of `ArcadeAccount` with specified `accountName` and `accountPassword`
-     */
+
     public CasinoAccount createAccount(String accountName, String accountPassword) {
         CasinoAccount myAccount = new CasinoAccount(accountName, accountPassword);
         return myAccount;
     }
 
-    /**
-     * logs & registers a new `ArcadeAccount` to `this.getArcadeAccountList()`
-     *
-     * @param casinoAccount the arcadeAccount to be added to `this.getArcadeAccountList()`
-     */
+
     public void registerAccount(CasinoAccount casinoAccount) {
         this.accountList.add(casinoAccount);
     }
