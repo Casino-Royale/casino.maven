@@ -40,8 +40,5 @@ public class Card {
     public List<Integer> getCardPool() {
         return cardPool;
     }
-
-    public void setCardPool(List<Integer> cardPool) {
-        this.cardPool = cardPool;
-    }
+    
 }
