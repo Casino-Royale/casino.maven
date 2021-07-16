@@ -6,6 +6,7 @@ import com.github.zipcodewilmington.casino.PlayerInterface;
 import com.github.zipcodewilmington.casino.games.Beetle.BeetleGame;
 import com.github.zipcodewilmington.casino.games.blackjack.BlackJack;
 import com.github.zipcodewilmington.casino.games.blackjack.BlackJackGame;
+import com.github.zipcodewilmington.casino.games.blackjack.BlackJackPlayer;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -95,5 +96,28 @@ public class BlackJackGameTest {
                 "=====                     J A C K                      =====" + "\n" +
                 "=====                                                  =====" + "\n" +
                 "============================================================");
+    }
+
+    @Test
+    public void getRunningTest () {
+        BlackJackGame bj = new BlackJackGame();
+        boolean expected = false;
+        boolean actual = bj.getRunning();
+
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void removePlayerTest () {
+        BlackJackGame bj = new BlackJackGame();
+        CasinoAccount account = new CasinoAccount("Bjork", "beeyork");
+        PlayerInterface player = new Player("Bjork", account);
+
+        bj.add(player);
+        bj.remove(player);
+        Boolean expected = false;
+        Boolean actual = bj.getPlayer() != null;
+
+        Assert.assertEquals(expected, actual);
     }
 }
