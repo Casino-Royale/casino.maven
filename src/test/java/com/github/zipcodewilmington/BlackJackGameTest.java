@@ -120,4 +120,21 @@ public class BlackJackGameTest {
 
         Assert.assertEquals(expected, actual);
     }
+
+    @Test
+    public void startGameTest2(){
+        BlackJackGame bj = new BlackJackGame();
+        CasinoAccount account = new CasinoAccount("Bjork", "beeyork");
+        PlayerInterface player = new Player("Bjork", account);
+        List<Integer> playersHand = new ArrayList<>();
+        playersHand.add(9);
+        playersHand.add(9);
+
+        bj.getGame().setPlayersHand(playersHand);
+
+        bj.setDemo(true);
+        bj.startGame();
+
+        Assert.assertNotNull(bj);
+    }
 }
