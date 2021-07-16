@@ -120,7 +120,12 @@ public class SlotsGame implements GameInterface{
         int count = 0;
         Integer[] selectedLines = new Integer[numberOfLines];
         while (count < numberOfLines){
-            selectedLines[count] = Blue.getIntegerInput("Select your line #" + (count + 1));
+            Integer userInput;
+            userInput = Blue.getIntegerInput("Select your line #" + (count + 1));
+            while(userInput <= (0)  && userInput > 8){
+                userInput = Red.getIntegerInput("Select a number between 1 and 8!");
+            }
+            selectedLines[count] = userInput;
             count++;
         }
         return selectedLines;
