@@ -48,7 +48,7 @@ public class SlotsGame implements GameInterface{
     @Override
     public void run() {
         Scanner scanner = new Scanner(System.in);
-        printWelcome();
+        Yellow.println(printWelcome());
         Slots slotMachine = new Slots();
         slotMachine.spinSlots();
         //Display first slots
@@ -87,13 +87,13 @@ public class SlotsGame implements GameInterface{
         }
     }
 
-    public void printWelcome() {
-        Yellow.println(
-                "***********************************\n" +
+    public String printWelcome() {
+        return "***********************************\n" +
                 "***                             ***\n" +
                 "******    WELCOME TO SLOTS   ******\n" +
                 "***                             ***\n" +
-                "***********************************");
+                "***********************************";
+
     }
 
     public void getBetAmount() {
@@ -103,25 +103,15 @@ public class SlotsGame implements GameInterface{
     }
 
     public Integer[] getBetSelections() {
-        Scanner scanner = new Scanner(System.in);
-        Blue.println("How many lines do you want to bet on?");
-        Integer numberOfLines = scanner.nextInt();
+        Integer numberOfLines = Blue.getIntegerInput("How many lines do you want to bet on?");
         Integer totalCost = playerBetAmount * numberOfLines;
         Red.println("Total cost to play:       " + totalCost);
         setBetTotal(totalCost);
-
-        Cyan.println(
-        "************************************************************************\n" +
-        "**                 Select the lines you want to bet on!               **\n" +
-        "**   1. Top Horizontal  2. Middle Horizontal   3. Bottom Horizontal   **\n" +
-        "**   4. Left Vertical    5. Middle Vertical      6. Right Vertical    **\n" +
-        "**           7. Down Diagonal              8. Up Diagonal             **\n" +
-        "************************************************************************");
+        Cyan.println(lineChoices());
         int count = 0;
         Integer[] selectedLines = new Integer[numberOfLines];
         while (count < numberOfLines){
-            Blue.println("Select your line #" + (count + 1));
-            selectedLines[count] = scanner.nextInt();
+            selectedLines[count] = Blue.getIntegerInput("Select your line #" + (count + 1));
             count++;
         }
         return selectedLines;
@@ -143,6 +133,15 @@ public class SlotsGame implements GameInterface{
 
     public Integer calculateReturnTotal(Integer winnings, Integer losings){
         return this.betTotal + winnings - losings;
+    }
+
+    public String lineChoices(){
+        return "************************************************************************\n" +
+                "**                 Select the lines you want to bet on!               **\n" +
+                "**   1. Top Horizontal  2. Middle Horizontal   3. Bottom Horizontal   **\n" +
+                "**   4. Left Vertical    5. Middle Vertical      6. Right Vertical    **\n" +
+                "**           7. Down Diagonal              8. Up Diagonal             **\n" +
+                "************************************************************************";
     }
 
     @Override
