@@ -315,7 +315,7 @@ public class BlackJackGame implements GameInterface {
 
 
     public void remove(PlayerInterface player) {
-
+        this.playerInt = null;
     }
 
     public Boolean getRunning() {
@@ -332,5 +332,9 @@ public class BlackJackGame implements GameInterface {
 
     public void setUserBet(Integer userBet) {
         this.userBet = userBet;
+    }
+
+    public PlayerInterface getPlayer() {
+        return playerInt;
     }
 }
