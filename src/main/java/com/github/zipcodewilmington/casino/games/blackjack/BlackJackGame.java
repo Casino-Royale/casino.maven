@@ -10,6 +10,7 @@ import com.github.zipcodewilmington.utils.IOConsole;
 public class BlackJackGame implements GameInterface {
     private Boolean isRunning = false;
     private PlayerInterface playerInt;
+    private Boolean isDemo = false;
     Integer userBet;
     Integer splitBet;
     IOConsole input = new IOConsole();
@@ -78,6 +79,8 @@ public class BlackJackGame implements GameInterface {
                 calculateWinnings(3, userBet);
             } else if (bj.playersHand.get(0).equals(bj.playersHand.get(1))) {  // include conditional on starting blackjack!
                 splitPlayer();
+            } else if(isDemo){
+                return;
             } else {
                 standardGame();
         }
@@ -336,5 +339,17 @@ public class BlackJackGame implements GameInterface {
 
     public PlayerInterface getPlayer() {
         return playerInt;
+    }
+
+    public Boolean getDemo() {
+        return isDemo;
+    }
+
+    public void setDemo(Boolean demo) {
+        isDemo = demo;
+    }
+
+    public BlackJack getGame() {
+        return bj;
     }
 }
