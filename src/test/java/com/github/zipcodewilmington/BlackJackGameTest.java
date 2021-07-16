@@ -63,12 +63,6 @@ public class BlackJackGameTest {
         Assert.assertEquals(expected, actual);
     }
 
-    @Test
-    public void splitPlayerHitsBlackJackTest () {
-        BlackJackGame bjg = new BlackJackGame();
-        BlackJack bj = new BlackJack();
-
-    }
 
     @Test
     public void runTest () {
@@ -129,12 +123,154 @@ public class BlackJackGameTest {
         List<Integer> playersHand = new ArrayList<>();
         playersHand.add(9);
         playersHand.add(9);
-
-        bj.getGame().setPlayersHand(playersHand);
-
+        bj.setGame();
+        BlackJack game = bj.getGame();
+        game.setPlayersHand(playersHand);
         bj.setDemo(true);
         bj.startGame();
 
         Assert.assertNotNull(bj);
+    }
+
+    @Test
+    public void startGameTest3(){
+        BlackJackGame bj = new BlackJackGame();
+        List<Integer> playersHand = new ArrayList<>();
+        playersHand.add(11);
+        playersHand.add(10);
+        bj.setGame();
+        BlackJack game = bj.getGame();
+        game.setPlayersHand(playersHand);
+        bj.setUserBet(100);
+        Boolean actual = bj.twoCardBlackJack();
+
+        Assert.assertTrue(actual);
+    }
+
+    @Test
+    public void getDemoTest(){
+        BlackJackGame bj = new BlackJackGame();
+        bj.setDemo(true);
+        Boolean actual = bj.getDemo();
+
+        Assert.assertTrue(actual);
+    }
+
+    @Test
+    public void addMoneyToBalanceTest(){
+        BlackJackGame bj = new BlackJackGame();
+        CasinoAccount account = new CasinoAccount("Bjork", "beeyork");
+        PlayerInterface player = new Player("Bjork", account);
+        player.setArcadeAccount(account);
+
+        bj.addMoneyToBalance(player, 100);
+
+        Integer expected = 100;
+        Integer actual = player.getArcadeAccount().getAccountBalance();
+
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void subtractMoneyFromBalanceTest(){
+        BlackJackGame bj = new BlackJackGame();
+        CasinoAccount account = new CasinoAccount("Bjork", "beeyork");
+        PlayerInterface player = new Player("Bjork", account);
+        player.setArcadeAccount(account);
+
+        bj.add(player);
+
+        bj.addMoneyToBalance(player, 100);
+        bj.subtractBetFromBalance(50);
+        Integer expected = 50;
+        Integer actual = player.getArcadeAccount().getAccountBalance();
+
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void playerHitsBlackJackTest(){
+        BlackJackGame bj = new BlackJackGame();
+        List<Integer> playersHand = new ArrayList<>();
+        playersHand.add(11);
+        playersHand.add(10);
+        bj.setGame();
+        BlackJack game = bj.getGame();
+        game.setPlayersHand(playersHand);
+        bj.setUserBet(100);
+        Boolean actual = bj.playerHitsBlackJack();
+
+        Assert.assertTrue(actual);
+    }
+
+    @Test
+    public void playerHitsBlackJackTest2(){
+        BlackJackGame bj = new BlackJackGame();
+        List<Integer> playersHand = new ArrayList<>();
+        playersHand.add(10);
+        playersHand.add(10);
+        bj.setGame();
+        BlackJack game = bj.getGame();
+        game.setPlayersHand(playersHand);
+        bj.setUserBet(100);
+        Boolean actual = bj.playerHitsBlackJack();
+
+        Assert.assertFalse(actual);
+    }
+
+    @Test
+    public void splitPlayerHitsBlackJackTest () {
+        BlackJackGame bj = new BlackJackGame();
+        List<Integer> playersHand = new ArrayList<>();
+        playersHand.add(10);
+        playersHand.add(10);
+        bj.setGame();
+        BlackJack game = bj.getGame();
+        game.setPlayersHand(playersHand);
+        bj.setUserBet(100);
+        Boolean actual = bj.splitPlayerHitsBlackJack();
+
+        Assert.assertFalse(actual);
+
+    }
+
+    @Test
+    public void splitPlayerHitsBlackJackTest2 () {
+        BlackJackGame bj = new BlackJackGame();
+        List<Integer> playersHand = new ArrayList<>();
+        playersHand.add(11);
+        playersHand.add(9);
+        playersHand.add(1);
+        bj.setGame();
+        BlackJack game = bj.getGame();
+        game.setPlayersHandOnSplit(playersHand);
+        game.setPlayersHand(playersHand);
+        bj.setUserBet(100);
+        bj.setSplitBet(100);
+        Boolean actual = bj.splitPlayerHitsBlackJack();
+
+        Assert.assertTrue(actual);
+    }
+
+    @Test
+    public void splitPlayerBustHasAces () {
+        BlackJackGame bj = new BlackJackGame();
+        List<Integer> playersHand = new ArrayList<>();
+        playersHand.add(10);
+        playersHand.add(10);
+        playersHand.add(11);
+        bj.setGame();
+        BlackJack game = bj.getGame();
+        game.setPlayersHandOnSplit(playersHand);
+        game.setPlayersHand(playersHand);
+        bj.setUserBet(100);
+        bj.setSplitBet(100);
+        bj.playerBustButHasAces();
+        Integer expected = 21;
+        Integer actual = 0;
+        for (int i = 0; i < game.getPlayersHandOnSplit().size(); i++) {
+            actual += game.getPlayersHandOnSplit().get(i);
+        }
+        Assert.assertEquals(actual, expected);
     }
 }
