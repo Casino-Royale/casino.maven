@@ -175,7 +175,11 @@ public class BeetleGameTest {
     @Test
     public void printEndingGameMessage(){
         BeetleGame beetleGame = new BeetleGame();
-
+        beetleGame.setBetAmt(100);
+        CasinoAccount account = new CasinoAccount("Bjork", "beeyork");
+        PlayerInterface player = new Player("Bjork", account);
+        player.getArcadeAccount().alterAccountBalance(500);
+        beetleGame.add(player);
         String actual = beetleGame.printEndingGameMessage();
         String expected = "\nFinal Beetle results: \n" +
                 "\u001B[32mYour last dice roll: 0  Your Beetle:  \n" +
