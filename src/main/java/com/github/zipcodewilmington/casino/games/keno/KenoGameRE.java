@@ -15,6 +15,8 @@ public class KenoGameRE implements GameInterface {
     private HashSet<Integer> tenChoices;
     private HashSet<Integer> twentyOneRandom;
     private HashSet<Integer> matches;
+    private Integer multiplier;
+    private Integer winnings;
 
     //---------------------------------------------------------------------
 
@@ -62,10 +64,17 @@ public class KenoGameRE implements GameInterface {
         console = new IOConsole(AnsiColor.YELLOW);
         console.println("Matches: " + matches);
 
-        //Calculate winnings
+        //Calculate multiplier then set multiplier
+        Integer multiply = calculateMultiplier();
+        setMultiplier(multiply);
 
-
+        //Calculate winnings and set it
+        Integer win = calculateWinnings(multiplier,userBet);
+        setWinnings(win);
         //Print winnings
+        console = new IOConsole(AnsiColor.GREEN);
+        console.println("You won:   $" + winnings);
+
         //Add winnings to player's account balance
         //Print user current balance
         //Ask user to play again
@@ -85,7 +94,7 @@ public class KenoGameRE implements GameInterface {
 
     @Override
     public Integer calculateWinnings(Integer multiplier, Integer betAmount) {
-        return null;
+        return multiplier * betAmount;
     }
 
     @Override
@@ -130,6 +139,22 @@ public class KenoGameRE implements GameInterface {
 
     public void setTenChoices(HashSet<Integer> tenChoices) {
         this.tenChoices = tenChoices;
+    }
+
+    public Integer getMultiplier() {
+        return multiplier;
+    }
+
+    public void setMultiplier(Integer multiplier) {
+        this.multiplier = multiplier;
+    }
+
+    public Integer getWinnings() {
+        return winnings;
+    }
+
+    public void setWinnings(Integer winnings) {
+        this.winnings = winnings;
     }
 
     //-------------------------- My own methods ----------------------------
@@ -192,6 +217,10 @@ public class KenoGameRE implements GameInterface {
             }
         }
         return matched;
+    }
+
+    public Integer calculateMultiplier(){
+        return multiplier = matches.size();
     }
 
 }

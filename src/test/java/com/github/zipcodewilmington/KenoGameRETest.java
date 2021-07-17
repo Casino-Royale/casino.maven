@@ -94,8 +94,24 @@ public class KenoGameRETest {
         Assert.assertEquals(userChoices,keno.getMatches());
     }
 
+    @Test
+    public void multiplier(){
+        KenoGameRE keno = new KenoGameRE();
+        HashSet<Integer> matches = new HashSet<>();
+        Stream.of(1,2,3,4,5,6,7,8,9,10).forEach(e -> matches.add(e));
+        keno.setMatches(matches);
+        Integer actual = keno.calculateMultiplier();
+        Integer expected = 10;
+        Assert.assertEquals(expected,actual);
+    }
 
-
+    @Test
+    public void calculateWinning(){
+        KenoGameRE keno = new KenoGameRE();
+        Integer actual = keno.calculateWinnings(10, 5);
+        Integer exp = 50;
+        Assert.assertEquals(exp,actual);
+    }
 
 
 
