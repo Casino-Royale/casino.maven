@@ -1,3 +1,5 @@
+package com.github.zipcodewilmington;
+
 import com.github.zipcodewilmington.casino.GameInterface;
 import com.github.zipcodewilmington.casino.GameScoreboardInterface;
 import com.github.zipcodewilmington.utils.GameScoreBoard;
@@ -33,10 +35,10 @@ public class GameScoreBoardTest {
     @Test
     public void lifetimeBetsTest(){
         Scoreboard scoreboard = new Scoreboard();
-        scoreboard.getPlinkoScores().incrementLifetimeBets();
+        scoreboard.getPlinkoScores().addToLifetimeBets(100);
 
         Integer actual = scoreboard.getPlinkoScores().getLifetimeBets();
-        Integer expected = 1;
+        Integer expected = 100;
 
         Assert.assertEquals(expected, actual);
     }
@@ -63,4 +65,45 @@ public class GameScoreBoardTest {
         Assert.assertEquals(expected, actual);
     }
 
+    @Test
+    public void scoreboardLifetimeBets(){
+        Scoreboard scoreboard = new Scoreboard();
+        scoreboard.getPlinkoScores().addToLifetimeBets(300);
+
+        Integer actual = scoreboard.lifetimeBets();
+        Integer expected = 300;
+
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void scoreboardLifetimeWinnings(){
+        Scoreboard scoreboard = new Scoreboard();
+        scoreboard.getPlinkoScores().addToLifetimeWinnings(300);
+
+        Integer actual = scoreboard.lifetimeWinnings();
+        Integer expected = 300;
+
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void scoreboardLifetimeLosses(){
+        Scoreboard scoreboard = new Scoreboard();
+        scoreboard.getPlinkoScores().addToLifetimeLosses(300);
+
+        Integer actual = scoreboard.lifetimeLosses();
+        Integer expected = 300;
+
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void scoreboardCSVArrayTest(){
+        Scoreboard scoreboard = new Scoreboard();
+        Integer[] expected = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,};
+        Integer[] actual = scoreboard.createCSVArray();
+
+        Assert.assertArrayEquals(expected, actual);
+    }
 }

@@ -16,8 +16,8 @@ public class GameScoreBoard implements GameScoreboardInterface {
         return lifetimeBets;
     }
 
-    public void incrementLifetimeBets() {
-        this.lifetimeBets++;
+    public void addToLifetimeBets(Integer betAmt) {
+        this.lifetimeBets += betAmt;
     }
 
     public Integer getLifetimeWinnings() {
