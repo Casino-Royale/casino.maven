@@ -23,7 +23,6 @@ public class REPlinko implements GameInterface {
     public void run() {
         printWelcome();
         while(!isRunning) {
-
             playerInt.getArcadeAccount().alterAccountBalance(actualWinnings);
             green.println("Your current account balance is " + playerInt.getArcadeAccount().getAccountBalance() + "\n");
             userInput = cyan.getIntegerInput("Wanna play?" + "\n" + "1. Yes" + "\n" + "2. No" + "\n");
