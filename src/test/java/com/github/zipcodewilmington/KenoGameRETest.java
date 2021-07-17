@@ -113,6 +113,27 @@ public class KenoGameRETest {
         Assert.assertEquals(exp,actual);
     }
 
+    @Test
+    public void addMoneyToBalance(){
+        KenoGameRE keno = new KenoGameRE();
+        CasinoAccount account = new CasinoAccount("name", "password");
+        Player player1 = new Player(null, account);
+        keno.add(player1);
+        keno.addMoneyToBalance(player1,500);
+        Integer exp = 500;
+        Integer act = keno.getPlayerBalance();
+        Assert.assertEquals(exp,act);
+    }
+
+    @Test
+    public void playAgain(){
+        KenoGameRE keno = new KenoGameRE();
+        CasinoAccount account = new CasinoAccount("name", "password");
+        Player player1 = new Player(null, account);
+        keno.add(player1);
+        Boolean quit = keno.playAgain();
+        Assert.assertTrue(quit);
+    }
 
 
 }

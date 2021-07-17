@@ -8,6 +8,12 @@ import com.github.zipcodewilmington.utils.IOConsole;
 import java.util.HashSet;
 
 public class KenoGameRE implements GameInterface {
+    private final IOConsole Red = new IOConsole(AnsiColor.RED);
+    private final IOConsole Green = new IOConsole(AnsiColor.GREEN);
+    private final IOConsole Yellow = new IOConsole(AnsiColor.YELLOW);
+    private final IOConsole Blue = new IOConsole(AnsiColor.BLUE);
+    private final IOConsole Purple = new IOConsole(AnsiColor.PURPLE);
+    private final IOConsole Cyan = new IOConsole(AnsiColor.CYAN);
     private IOConsole console = new IOConsole(AnsiColor.BLUE);
     private PlayerInterface currentPlayer;
     private Integer userBet;
@@ -26,85 +32,65 @@ public class KenoGameRE implements GameInterface {
     @Override
     public void run() {
         //Display welcome
-        console = new IOConsole(AnsiColor.YELLOW);
-        console.println(printWelcome());
-
+        Yellow.println(printWelcome());
         //Display instruction
-        console = new IOConsole(AnsiColor.BLUE);
-        console.println(displayInstruction());
-
-        //Print user current balance
-        console = new IOConsole(AnsiColor.GREEN);
-        console.println("Your Current Balance: " + getPlayerBalance());
-
-        //Ask user for bet amount
-        console = new IOConsole(AnsiColor.PURPLE);
-        userBet = console.getIntegerInput("How much do you want to bet?");
-
-        //Subtract bet amount from user's balance
-        subtractBetFromBalance(userBet);
-
-        //Ask user to pick 10 numbers between 1-80 and add to array
-        getUserChoices();
-
-        //Display user's picks
-        console = new IOConsole(AnsiColor.PURPLE);
-        console.println("Your chose: " + tenChoices);
-
-        //Generate 21 random numbers and add to array
-        setTwentyOneRandom(twentyOneRandomNum());
-
-        //Display the 21 random numbers
-        console.println("Game chose:" + twentyOneRandom);
-
-        //Find matches b/w user choice and random 21
-        setMatches(findMatches());
-
-        //Print matched array
-        console = new IOConsole(AnsiColor.YELLOW);
-        console.println("Matches: " + matches);
-
-        //Calculate multiplier then set multiplier
-        Integer multiply = calculateMultiplier();
-        setMultiplier(multiply);
-
-        //Calculate winnings and set it
-        Integer win = calculateWinnings(multiplier,userBet);
-        setWinnings(win);
-        //Print winnings
-        console = new IOConsole(AnsiColor.GREEN);
-        console.println("You won:   $" + winnings);
-
-        //Add winnings to player's account balance
-        //Print user current balance
-        //Ask user to play again
-
+        Blue.println(displayInstruction());
+        Boolean quit = false;
+        while(!quit) {
+            //Print user current balance
+            Green.println("Your Current Balance: " + getPlayerBalance());
+            //Ask user for bet amount
+            userBet = Purple.getIntegerInput("How much do you want to bet?");
+            //Subtract bet amount from user's balance
+            subtractBetFromBalance(userBet);
+            //Ask user to pick 10 numbers between 1-80 and add to array
+            getUserChoices();
+            //Display user's picks
+            Purple.println("Your chose: " + tenChoices);
+            //Generate 21 random numbers and add to array
+            setTwentyOneRandom(twentyOneRandomNum());
+            //Display the 21 random numbers
+            console.println("Game chose:" + twentyOneRandom);
+            //Find matches b/w user choice and random 21
+            setMatches(findMatches());
+            //Print matched array
+            Yellow.println("Matches: " + matches);
+            //Calculate multiplier then set multiplier
+            Integer multiply = calculateMultiplier();
+            setMultiplier(multiply);
+            //Calculate winnings and set it
+            Integer win = calculateWinnings(multiplier, userBet);
+            setWinnings(win);
+            //Print winnings
+            Green.println("You won:   $" + winnings);
+            //Add winnings to player's account balance
+            addMoneyToBalance(currentPlayer, winnings);
+            //Print user current balance
+            Green.println("Your Current Balance:   $" + getPlayerBalance());
+            //Ask user to play again
+            quit = playAgain();
+        }
     }
-
 
     @Override
     public void add(PlayerInterface player) {
         this.currentPlayer = player;
     }
-
     @Override
     public void remove(PlayerInterface player) {
         this.currentPlayer = null;
     }
-
     @Override
     public Integer calculateWinnings(Integer multiplier, Integer betAmount) {
         return multiplier * betAmount;
     }
-
     @Override
     public void subtractBetFromBalance(Integer betAmount) {
         currentPlayer.getArcadeAccount().alterAccountBalance(betAmount * (-1));
     }
-
     @Override
     public void addMoneyToBalance(PlayerInterface Player, Integer winnings) {
-
+        Player.getArcadeAccount().alterAccountBalance(winnings);
     }
 
     //-------------------------- Getters and Setters -----------------------
@@ -178,13 +164,12 @@ public class KenoGameRE implements GameInterface {
     }
 
     public void getUserChoices(){
-        console = new IOConsole(AnsiColor.CYAN);
         HashSet choices = new HashSet();
         Integer count = 0;
         while(choices.size() < 10){
-            currentUserChoice = console.getIntegerInput("Choose your #" + (count+1) +" number");
+            currentUserChoice = Cyan.getIntegerInput("Choose your #" + (count+1) +" number");
             if(choices.contains(currentUserChoice)){
-                console.println("You already chose that number! Try again!");
+                Cyan.println("You already chose that number! Try again!");
             } else {
                 choiceCondition();
                 choices.add(currentUserChoice);
@@ -196,7 +181,7 @@ public class KenoGameRE implements GameInterface {
 
     public void choiceCondition(){
         while(currentUserChoice < 1 || currentUserChoice > 80){
-            currentUserChoice = console.getIntegerInput("Please choose number between 1 - 80");
+            currentUserChoice = Blue.getIntegerInput("Please choose number between 1 - 80");
         }
     }
 
@@ -223,4 +208,18 @@ public class KenoGameRE implements GameInterface {
         return multiplier = matches.size();
     }
 
+    public Boolean playAgain(){
+        if(getPlayerBalance() == 0) {
+            Red.println("Oh No! You've ran out of money. Goodbye");
+            return true;
+        } else {
+            //Continue game?
+            Integer userInput = Cyan.getIntegerInput("Would you like to play again?\n" +
+                    "1. Yes   2. No");
+            if(userInput.equals(2)){
+                return true;
+            }
+        }
+        return false;
+    }
 }
