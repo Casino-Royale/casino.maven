@@ -16,6 +16,7 @@ public class GameScoreBoard implements GameScoreboardInterface {
         return lifetimeBets;
     }
 
+
     public void addToLifetimeBets(Integer betAmt) {
         this.lifetimeBets += betAmt;
     }

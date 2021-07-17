@@ -1,5 +1,6 @@
 package com.github.zipcodewilmington.casino;
 
+
 import com.github.zipcodewilmington.utils.GameScoreBoard;
 
 public interface GameScoreboardInterface {
@@ -9,5 +10,4 @@ public interface GameScoreboardInterface {
     void addToLifetimeWinnings(Integer winnings);
     void addToLifetimeLosses(Integer losses);
     void addToLifetimeBets(Integer bets);
-
 }

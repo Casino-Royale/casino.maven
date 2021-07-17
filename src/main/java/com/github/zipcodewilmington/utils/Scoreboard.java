@@ -1,5 +1,6 @@
 package com.github.zipcodewilmington.utils;
 
+
 import com.github.zipcodewilmington.casino.GameScoreboardInterface;
 
 import java.util.ArrayList;
@@ -20,6 +21,8 @@ public class Scoreboard {
         this.boards[3] = numberGuessScores;
         this.boards[4] = plinkoScores;
     }
+
+
     public GameScoreBoard getBlackJackScores() {
         return blackjackScores;
     }
@@ -84,4 +87,5 @@ public class Scoreboard {
     public GameScoreboardInterface[] getBoards() {
         return boards;
     }
+
 }
