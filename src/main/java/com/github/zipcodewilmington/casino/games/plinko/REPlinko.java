@@ -2,6 +2,7 @@ package com.github.zipcodewilmington.casino.games.plinko;
 
 import com.github.zipcodewilmington.casino.GameInterface;
 import com.github.zipcodewilmington.casino.PlayerInterface;
+import com.github.zipcodewilmington.utils.AnsiColor;
 import com.github.zipcodewilmington.utils.IOConsole;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -12,20 +13,23 @@ public class REPlinko implements GameInterface {
     private Boolean isRunning = false;
     public List<Integer> winningValues;
     Integer userBet;
+    Integer userInput;
     Integer actualWinnings = 0;
     IOConsole input = new IOConsole();
-    Integer userInput;
-    Integer tester;
+    IOConsole green = new IOConsole(AnsiColor.GREEN);
+    IOConsole red = new IOConsole(AnsiColor.RED);
+    IOConsole cyan = new IOConsole(AnsiColor.CYAN);
 
     public void run() {
         printWelcome();
         while(!isRunning) {
+
             playerInt.getArcadeAccount().alterAccountBalance(actualWinnings);
-            input.println("Your current account balance is " + playerInt.getArcadeAccount().getAccountBalance());
-            userInput = input.getIntegerInput("Wanna play?" + "\n" + "1. Yes" + "\n" + "2. No" + "\n");
+            green.println("Your current account balance is " + playerInt.getArcadeAccount().getAccountBalance() + "\n");
+            userInput = cyan.getIntegerInput("Wanna play?" + "\n" + "1. Yes" + "\n" + "2. No" + "\n");
             switch (userInput) {
                 case 1:
-                    userBet = input.getIntegerInput("How much would you like to bet?");
+                    askForBet();
                     userBetCondition();
                     playerInt.getArcadeAccount().alterAccountBalance(userBet * (-1));
                     startGame();
@@ -40,6 +44,7 @@ public class REPlinko implements GameInterface {
         createBoard();
         shuffleBoard();
         calculateWinnings(checkWin(), userBet);
+        printWinnings();
     }
 
     public Integer checkWin () {
@@ -66,13 +71,25 @@ public class REPlinko implements GameInterface {
 
     private void userBetCondition() {
         while (userBet > playerInt.getArcadeAccount().getAccountBalance()) {
-            input.println("Oh no! You're trying to place a bet with more money than you have...");
-            userBet = (input.getIntegerInput("\u001B[32mHow much would you like to bet?" + "\n"));
+            red.println("Oh no! You're trying to place a bet with more money than you have..." + "\n");
+            askForBet();
         }
     }
 
     private void printWelcome() {
         input.println("Welcome!");
+    }
+
+    public void askForBet () {
+        userBet = (green.getIntegerInput("How much would you like to bet?" + "\n"));
+    }
+
+    public void printWinnings () {
+        if (actualWinnings > 0) {
+            green.println("You've won " + actualWinnings + "!!" + "\n");
+        } else {
+            red.println("Ahhh, better luck next time! You lost... " + "\n");
+        }
     }
 
     public void add(PlayerInterface player) {
