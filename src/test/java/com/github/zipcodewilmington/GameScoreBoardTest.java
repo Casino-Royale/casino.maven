@@ -106,4 +106,52 @@ public class GameScoreBoardTest {
 
         Assert.assertArrayEquals(expected, actual);
     }
+
+    @Test
+    public void getBoardsTest(){
+        Scoreboard scoreboard = new Scoreboard();
+
+        GameScoreboardInterface[] boards = scoreboard.getBoards();
+        Boolean actual = boards[0] instanceof GameScoreboardInterface;
+
+        Assert.assertTrue(actual);
+    }
+
+    @Test
+    public void printScoreTest(){
+        Scoreboard scoreboard = new Scoreboard();
+
+        String actual = scoreboard.printAllScores();
+        String expected = "Lifetime Stats\n" +
+                "Bet  :$0\n" +
+                "Won  :$0\n" +
+                "Loss :$0\n" +
+                "\n" +
+                "Beetle\n" +
+                "Bet  :$0\n" +
+                "Won  :$0\n" +
+                "Lost :$0\n" +
+                "\n" +
+                "Blackjack\n" +
+                "Bet  :$0\n" +
+                "Won  :$0\n" +
+                "Lost :$0\n" +
+                "\n" +
+                "Keno\n" +
+                "Bet  :$0\n" +
+                "Won  :$0\n" +
+                "Lost :$0\n" +
+                "\n" +
+                "Number Guess\n" +
+                "Bet  :$0\n" +
+                "Won  :$0\n" +
+                "Lost :$0\n" +
+                "\n" +
+                "Plinko\n" +
+                "Bet  :$0\n" +
+                "Won  :$0\n" +
+                "Lost :$0\n\n";
+
+        Assert.assertEquals(expected, actual);
+    }
 }

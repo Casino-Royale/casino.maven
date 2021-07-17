@@ -10,4 +10,6 @@ public interface GameScoreboardInterface {
     void addToLifetimeWinnings(Integer winnings);
     void addToLifetimeLosses(Integer losses);
     void addToLifetimeBets(Integer bets);
+    String getGameName();
+    String printScores();
 }
