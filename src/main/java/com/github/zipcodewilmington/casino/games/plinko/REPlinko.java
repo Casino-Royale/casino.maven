@@ -10,17 +10,19 @@ import java.util.List;
 public class REPlinko implements GameInterface {
     private PlayerInterface playerInt;
     private Boolean isRunning = false;
-    List<Integer> winningValues;
+    public List<Integer> winningValues;
     Integer userBet;
     Integer actualWinnings = 0;
     IOConsole input = new IOConsole();
+    Integer userInput;
+    Integer tester;
 
     public void run() {
         printWelcome();
         while(!isRunning) {
             playerInt.getArcadeAccount().alterAccountBalance(actualWinnings);
             input.println("Your current account balance is " + playerInt.getArcadeAccount().getAccountBalance());
-            Integer userInput = input.getIntegerInput("Wanna play?" + "\n" + "1. Yes" + "\n" + "2. No" + "\n");
+            userInput = input.getIntegerInput("Wanna play?" + "\n" + "1. Yes" + "\n" + "2. No" + "\n");
             switch (userInput) {
                 case 1:
                     userBet = input.getIntegerInput("How much would you like to bet?");
@@ -34,17 +36,17 @@ public class REPlinko implements GameInterface {
         }
     }
 
-    void startGame() {
+    public void startGame() {
         createBoard();
         shuffleBoard();
         calculateWinnings(checkWin(), userBet);
     }
 
-    Integer checkWin () {
+    public Integer checkWin () {
         return winningValues.get(0);
     }
 
-    void createBoard () {
+    public void createBoard () {
         winningValues = new ArrayList<>();
         winningValues.add(0);
         winningValues.add(0);
@@ -58,7 +60,7 @@ public class REPlinko implements GameInterface {
         winningValues.add(5);
     }
 
-    void shuffleBoard () {
+    public void shuffleBoard () {
         Collections.shuffle(winningValues);
     }
 
@@ -87,10 +89,26 @@ public class REPlinko implements GameInterface {
     }
 
     public void subtractBetFromBalance(Integer betAmount) {
-
+        playerInt.getArcadeAccount().alterAccountBalance(betAmount * (-1));
     }
 
     public void addMoneyToBalance(PlayerInterface Player, Integer winnings) {
+        Player.getArcadeAccount().alterAccountBalance(winnings);
+    }
 
+    public PlayerInterface getPlayerInt() {
+        return playerInt;
+    }
+
+    public Boolean getRunning() {
+        return isRunning;
+    }
+
+    public void setRunning(Boolean running) {
+        isRunning = running;
+    }
+
+    public Integer getUserBet() {
+        return userBet;
     }
 }
