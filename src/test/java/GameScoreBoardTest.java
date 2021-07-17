@@ -33,7 +33,7 @@ public class GameScoreBoardTest {
     @Test
     public void lifetimeBetsTest(){
         Scoreboard scoreboard = new Scoreboard();
-        scoreboard.getPlinkoScores().incrementLifetimeBets();
+        scoreboard.getPlinkoScores().addToLifetimeBets(1);
 
         Integer actual = scoreboard.getPlinkoScores().getLifetimeBets();
         Integer expected = 1;
