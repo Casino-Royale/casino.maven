@@ -36,4 +36,16 @@ public class GameScoreBoard implements GameScoreboardInterface {
     public void addToLifetimeLosses(Integer losses) {
         this.lifetimeLosses += losses;
     }
+
+    public String getGameName(){ return this.gameName; }
+
+    public String printScores(){
+        String output = "";
+        output += this.getGameName();
+        output += "\nBet  :$" + this.getLifetimeBets();
+        output += "\nWon  :$" + this.getLifetimeWinnings();
+        output += "\nLost :$" + this.getLifetimeLosses();
+
+        return output;
+    }
 }

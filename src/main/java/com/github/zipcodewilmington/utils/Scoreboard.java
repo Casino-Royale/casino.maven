@@ -88,4 +88,23 @@ public class Scoreboard {
         return boards;
     }
 
+    public String lifetimeStats(){
+        String output = "Lifetime Stats";
+        output += "\nBet  :$" + this.lifetimeBets();
+        output += "\nWon  :$" + this.lifetimeWinnings();
+        output += "\nLoss :$" + this.lifetimeLosses();
+
+        return output;
+    }
+
+    public String printAllScores(){
+        String output = this.lifetimeStats() + "\n\n";
+
+        for(int i = 0; i < this.boards.length; i++){
+            output += boards[i].printScores() + "\n\n";
+        }
+
+        return output;
+    }
+
 }
