@@ -192,5 +192,5 @@ public class SlotsGame implements GameInterface{
             betTotal = Green.getIntegerInput("How much would you like to bet?\n");
         }
     }
-//
+
 }
