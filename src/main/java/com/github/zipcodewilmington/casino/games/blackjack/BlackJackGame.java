@@ -32,7 +32,6 @@ public class BlackJackGame implements GameInterface {
     */
 
     public BlackJackGame () {
-
     }
 
     public void run() {

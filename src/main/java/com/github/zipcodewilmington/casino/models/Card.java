@@ -40,5 +40,5 @@ public class Card {
     public List<Integer> getCardPool() {
         return cardPool;
     }
-    
+
 }
