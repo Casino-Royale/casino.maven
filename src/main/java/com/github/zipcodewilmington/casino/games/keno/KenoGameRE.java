@@ -34,26 +34,32 @@ public class KenoGameRE implements GameInterface {
         //Display welcome
         Yellow.println(printWelcome());
         //Display instruction
+        console.setWait(1000);
         Blue.println(displayInstruction());
         Boolean quit = false;
         while(!quit) {
             //Print user current balance
+            console.setWait(1000);
             Green.println("Your Current Balance: " + getPlayerBalance());
             //Ask user for bet amount
+            console.setWait(1000);
             userBet = Purple.getIntegerInput("How much do you want to bet?");
             //Subtract bet amount from user's balance
             subtractBetFromBalance(userBet);
             //Ask user to pick 10 numbers between 1-80 and add to array
             getUserChoices();
             //Display user's picks
+            console.setWait(1000);
             Purple.println("Your chose: " + tenChoices);
             //Generate 21 random numbers and add to array
             setTwentyOneRandom(twentyOneRandomNum());
             //Display the 21 random numbers
+            console.setWait(1000);
             console.println("Game chose:" + twentyOneRandom);
             //Find matches b/w user choice and random 21
             setMatches(findMatches());
             //Print matched array
+            console.setWait(1000);
             Yellow.println("Matches: " + matches);
             //Calculate multiplier then set multiplier
             Integer multiply = calculateMultiplier();
@@ -62,10 +68,12 @@ public class KenoGameRE implements GameInterface {
             Integer win = calculateWinnings(multiplier, userBet);
             setWinnings(win);
             //Print winnings
+            console.setWait(1000);
             Green.println("You won:   $" + winnings);
             //Add winnings to player's account balance
             addMoneyToBalance(currentPlayer, winnings);
             //Print user current balance
+            console.setWait(1000);
             Green.println("Your Current Balance:   $" + getPlayerBalance());
             //Ask user to play again
             quit = playAgain();
@@ -210,10 +218,12 @@ public class KenoGameRE implements GameInterface {
 
     public Boolean playAgain(){
         if(getPlayerBalance() == 0) {
+            console.setWait(1000);
             Red.println("Oh No! You've ran out of money. Goodbye");
             return true;
         } else {
             //Continue game?
+            console.setWait(1000);
             Integer userInput = Cyan.getIntegerInput("Would you like to play again?\n" +
                     "1. Yes   2. No");
             if(userInput.equals(2)){
