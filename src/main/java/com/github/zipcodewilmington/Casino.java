@@ -4,8 +4,10 @@ import com.github.zipcodewilmington.casino.*;
 import com.github.zipcodewilmington.casino.games.Beetle.BeetleGame;
 import com.github.zipcodewilmington.casino.games.blackjack.BlackJackGame;
 import com.github.zipcodewilmington.casino.games.keno.KenoGame;
+import com.github.zipcodewilmington.casino.games.keno.KenoGameRE;
 import com.github.zipcodewilmington.casino.games.numberguess.NumberGuessGame;
 import com.github.zipcodewilmington.casino.games.plinko.PlinkoGame;
+import com.github.zipcodewilmington.casino.games.plinko.REPlinko;
 import com.github.zipcodewilmington.casino.games.slots.SlotsGame;
 import com.github.zipcodewilmington.utils.AnsiColor;
 import com.github.zipcodewilmington.utils.CSVUtils;
@@ -94,10 +96,10 @@ public class Casino implements Runnable {
                 gameObject = new NumberGuessGame();
                 break;
             case 3:
-                gameObject = new PlinkoGame();
+                gameObject = new REPlinko();
                 break;
             case 6:
-                gameObject = new KenoGame();
+                gameObject = new KenoGameRE();
                 break;
             default:
                 gameObject = new BeetleGame();
