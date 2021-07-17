@@ -12,6 +12,6 @@ public class KenoMain {
         Player player1 = new Player(null, account);
         keno.add(player1);
 
-        keno.getUserChoices();
+        keno.run();
     }
 }
