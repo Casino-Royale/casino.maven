@@ -60,14 +60,17 @@ public class Casino implements Runnable {
                 this.casinoAccount = CSVUtils.loadData();
                 this.player = new Player(this.casinoAccount.getAccountName(), this.casinoAccount);
                 casinoAccountManager.registerAccount(this.casinoAccount);
+            } else if(arcadeDashBoardInput.equals(5)){
+                console.print(this.casinoAccount.getScoreboard().printAllScores());
             }
-        } while (!arcadeDashBoardInput.equals(5));
+
+        } while (!arcadeDashBoardInput.equals(6));
     }
 
     private Integer getArcadeDashboardInput() {
         return console.getIntegerInput("Welcome to the Arcade Dashboard!\n" +
                 "From here, you can select any of the following options:\n" +
-                "\t[ 1. create-account ] [ 2. select-game ] [ 3. load-saved-account ] [ 4. save-account ] [ 5. logout ]");
+                "\t[ 1. create-account ] [ 2. select-game ] [ 3. load-saved-account ] [ 4. save-account ] [ 5.scoreboard ] [ 6. logout ]");
     }
 
     private Integer getGameSelectionInput() {
