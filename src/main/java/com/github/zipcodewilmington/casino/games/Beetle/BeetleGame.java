@@ -95,6 +95,7 @@ public class BeetleGame implements GameInterface {
         Integer payout = (int)(this.betAmt * 1.1);
         if(this.game.getCurrentPlayer() == 0){
             this.player.getArcadeAccount().alterAccountBalance(payout);
+            player.getArcadeAccount().getScoreboard().getBeetleScores().addToLifetimeWinnings(payout);
             return payout;
         }
         return 0;
@@ -134,10 +135,11 @@ public class BeetleGame implements GameInterface {
     }
 
 
-    public void printBalanceAndBetText(){
+    public String printBalanceAndBetText(){
         console.newLine();
         console.println("\u001B[35m Current account balance:        " + this.player.getArcadeAccount().getAccountBalance());
         console.newLine();
+        return "\u001B[35m Current account balance:        " + this.player.getArcadeAccount().getAccountBalance();
     }
 
     public String printWinnerMessage(){
@@ -145,6 +147,8 @@ public class BeetleGame implements GameInterface {
             this.determinePayout();
             return "You win!";
         } else {
+            this.player.getArcadeAccount().getScoreboard().getBeetleScores()
+                    .addToLifetimeLosses(this.betAmt);
             return "Dealer wins...";
         }
     }
@@ -155,15 +159,6 @@ public class BeetleGame implements GameInterface {
         output += this.printWinnerMessage() + printWinnerMessage();
 
         return output;
-        /*
-        console.newLine();
-        console.println("Final Beetle results: ");
-        this.printBeetleCards();
-        console.newLine();
-        this.printWinnerMessage();
-        console.println("Your payout is: " + this.determinePayout().toString());
-        console.pressEnterToProceed();
-         */
     }
 
     public Beetle getGame() {
@@ -192,6 +187,10 @@ public class BeetleGame implements GameInterface {
 
     public void setBetAmt(Integer betAmt) {
         this.betAmt = betAmt;
+        this.player.getArcadeAccount()
+                .getScoreboard()
+                .getBeetleScores()
+                .addToLifetimeBets(betAmt);
     }
 
     public void setRunning(boolean running){
