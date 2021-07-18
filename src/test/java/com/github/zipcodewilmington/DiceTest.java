@@ -74,7 +74,7 @@ public class DiceTest {
         dice.tossAndSum();
         Integer[] bins = dice.getBins();
         Integer actual = 0;
-        for(int i = 2; i < dice.getMaxBinIndex(); i++){
+        for(int i = 2; i <= dice.getMaxBinIndex(); i++){
             if(dice.getBin(i) > 0){
                 actual = dice.getBin(i);
                 break;
