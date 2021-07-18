@@ -127,4 +127,12 @@ public class REPlinko implements GameInterface {
     public Integer getUserBet() {
         return userBet;
     }
+
+    public void setUserBet(Integer amt){
+        this.userBet = amt;
+    }
+
+    public List<Integer> getWinningValues() {
+        return winningValues;
+    }
 }

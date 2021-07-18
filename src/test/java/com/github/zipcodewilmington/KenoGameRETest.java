@@ -135,5 +135,45 @@ public class KenoGameRETest {
         Assert.assertTrue(quit);
     }
 
+    @Test
+    public void getWinningsTest(){
+        KenoGameRE keno = new KenoGameRE();
+        CasinoAccount account = new CasinoAccount("name", "password");
+        Player player1 = new Player(null, account);
+        keno.add(player1);
+        keno.setWinnings(100);
+        Integer actual = keno.getWinnings();
+        Integer expected = 100;
+
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void setMultiplierTest(){
+        KenoGameRE keno = new KenoGameRE();
+        CasinoAccount account = new CasinoAccount("name", "password");
+        Player player1 = new Player(null, account);
+        keno.add(player1);
+        keno.setMultiplier(10);
+        Integer actual = keno.getMultiplier();
+        Integer expected = 10;
+
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void getTenChoices(){
+        KenoGameRE keno = new KenoGameRE();
+        CasinoAccount account = new CasinoAccount("name", "password");
+        Player player1 = new Player(null, account);
+        keno.add(player1);
+        HashSet<Integer> expected = new HashSet<>();
+        expected.add(1);
+        keno.setTenChoices(expected);
+        HashSet<Integer> actual = keno.getTenChoices();
+
+
+        Assert.assertTrue(expected.equals(actual));
+    }
 
 }

@@ -158,4 +158,20 @@ public class REPlinkoTest {
         Integer actual = player.getArcadeAccount().getAccountBalance();
         Assert.assertEquals(actual, expected);
     }
+
+    @Test
+    public void startGameTest(){
+        REPlinko game = new REPlinko();
+        CasinoAccount account = new CasinoAccount("Bjork", "beeyork");
+        PlayerInterface player = new Player("Bjork", account);
+        player.getArcadeAccount().alterAccountBalance(500);
+        game.setUserBet(100);
+        game.add(player);
+        game.startGame();
+
+        Integer expected = 10;
+        Integer actual = game.getWinningValues().size();
+
+        Assert.assertEquals(expected, actual);
+    }
 }
